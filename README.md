@@ -1,6 +1,6 @@
 # JSON Explorer
 
-An interactive JSON explorer for the browser and Windows desktop. It turns pasted or opened JSON files into an expandable tree.
+An interactive JSON explorer for the browser and Windows desktop. It turns pasted or opened JSON files into a node diagram.
 
 ## Browser version
 
@@ -19,8 +19,8 @@ running. The browser version can also load a file using **Apri file**.
 
 ## Features
 
-- Paste or edit JSON and render objects, arrays, and primitive values as a tree.
-- Expand or collapse nested structures and search keys, values, and paths.
+- Paste or edit JSON and render objects, arrays, and primitive values as a connected diagram.
+- Expand or collapse nested structures, pan and zoom the canvas, and search keys, values, and paths.
 - Load a `.json` file or copy the input as formatted JSON.
 - Invalid JSON reports the line and column when the browser provides a parse position.
 - All JSON parsing and visualization happen locally on the device.

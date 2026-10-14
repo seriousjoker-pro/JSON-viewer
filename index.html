@@ -109,18 +109,23 @@
               </button>
             </div>
           </div>
-
           <div class="tree-meta">
             <span id="tree-summary">Pronto per esplorare</span>
             <span id="result-count" aria-live="polite"></span>
           </div>
-          <div class="tree-scroll">
-            <div id="tree" class="tree" aria-live="polite"></div>
+          <div class="graph-canvas" id="graph-canvas">
+            <svg id="graph" class="graph" role="group" aria-label="Diagramma interattivo della struttura JSON"></svg>
             <div id="empty-state" class="empty-state" hidden>
               <span class="empty-icon" aria-hidden="true">⌕</span>
               <p>Nessun risultato trovato</p>
               <span>Prova un'altra chiave o un altro valore.</span>
             </div>
+            <div class="canvas-controls" aria-label="Controlli del diagramma">
+              <button id="zoom-out" type="button" aria-label="Riduci zoom">−</button>
+              <button id="fit-graph" type="button" aria-label="Centra e adatta diagramma">Adatta</button>
+              <button id="zoom-in" type="button" aria-label="Aumenta zoom">+</button>
+            </div>
+            <span class="canvas-hint">Trascina per spostarti · rotella per zoom</span>
           </div>
           <div class="visual-footer">
             <span><i class="legend-dot object-dot"></i> Oggetto</span>
