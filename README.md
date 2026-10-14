@@ -1,30 +1,188 @@
 # JSON Explorer
 
-An interactive JSON explorer for the browser and Windows desktop. It turns pasted or opened JSON files into a node diagram.
+**Visualizza ed esplora i tuoi JSON come un diagramma interattivo.**
 
-## Browser version
+JSON Explorer trasforma oggetti, array e valori in schede collegate: puoi aprire
+i singoli rami, seguire le relazioni e cercare nei dati senza perderti tra le
+parentesi. Disponibile come applicazione **desktop Windows** e come **web app**.
 
-Open `index.html` in a modern browser. No build step is required.
+[Download e versioni di prova](https://github.com/seriousjoker-pro/JSON-viewer/releases)
+| [Guida ai controlli](#esplorare-un-json)
+| [Licenza MIT](LICENSE)
 
-## Windows desktop version
+## Anteprima
 
-Install Node.js, then run `npm install` and `npm start` to launch the desktop app.
-Run `npm run dist:win` to build the Windows installer in `dist`. The installer
-registers `.json` files so JSON Explorer appears in Windows “Open with”. To make
-it the default, choose it from **Settings → Apps → Default apps** after installing;
-Windows requires the user to confirm default-app changes.
+![Editor JSON e diagramma interattivo con nodi collegati](docs/images/json-explorer-overview.png)
 
-The desktop app opens a file passed by Windows, including when it is already
-running. The browser version can also load a file using **Apri file**.
+L'editor a sinistra contiene il documento; il canvas a destra ne mostra la
+struttura. Oggetti, array e valori hanno colori distinti, con tipo e anteprima
+del contenuto su ogni scheda.
 
-## Features
+## Desktop Windows: download e installazione
 
-- Paste or edit JSON and render objects, arrays, and primitive values as a connected diagram.
-- Expand or collapse nested structures, pan and zoom the canvas, and search keys, values, and paths.
-- Load a `.json` file or copy the input as formatted JSON.
-- Invalid JSON reports the line and column when the browser provides a parse position.
-- All JSON parsing and visualization happen locally on the device.
+**Versione di prova:** la build dell'installer e' stata verificata, ma
+l'installazione completa e l'associazione dei file su Windows richiedono ancora
+una prova manuale.
 
-## License
+Non serve installare Node.js per utilizzare la versione desktop distribuita.
 
-Copyright (c) 2026 Marco Paleari. Licensed under the [MIT License](LICENSE).
+1. Apri la pagina [Release](https://github.com/seriousjoker-pro/JSON-viewer/releases).
+2. Nella sezione **Assets**, scarica `JSON Explorer Setup 1.0.0.exe`.
+3. Esegui l'installer e scegli la cartella di installazione.
+4. Avvia **JSON Explorer** e usa **Apri file** per caricare un documento `.json`.
+
+L'installer attuale e' per Windows x64. Non dispone di un certificato di firma
+digitale dell'autore: Windows potrebbe mostrare un avviso relativo a un autore
+sconosciuto.
+
+### Usare "Apri con" e impostare l'app predefinita
+
+L'installazione registra il supporto per l'estensione `.json`.
+Da Esplora file, fai clic destro su un documento e scegli **Apri con**,
+quindi seleziona **JSON Explorer**. Se non compare, usa **Scegli un'altra app**
+e individua `JSON Explorer.exe` nella cartella di installazione.
+
+Per aprire sempre i JSON con l'app, scegli JSON Explorer per l'estensione `.json`
+in **Impostazioni > App > App predefinite**. La modifica va confermata da te:
+l'installer non forza l'associazione predefinita.
+
+Se l'app e' gia' aperta, il file viene caricato nella stessa finestra, sostituendo
+il documento visualizzato. L'app permette di leggere e modificare il testo
+nell'editor, ma **non salva le modifiche sul file originale**: usa **Copia**
+per recuperare il JSON formattato.
+
+## Esplorare un JSON
+
+1. Incolla il documento nell'editor oppure usa **Apri file**.
+2. Premi **Visualizza struttura** dopo ogni modifica manuale; un file caricato
+   viene visualizzato automaticamente.
+3. Fai clic su una scheda oggetto o array per aprire o chiudere quel ramo.
+4. Cerca una chiave, un valore o un percorso: i risultati vengono evidenziati
+   e i rami necessari vengono aperti.
+
+![Ricerca del valore giulia con evidenziazione dei nodi e dei relativi percorsi](docs/images/json-explorer-search.png)
+
+| Controllo | Funzione |
+| --- | --- |
+| Clic su un oggetto o array non vuoto | Espande o riduce il singolo ramo |
+| Invio o Spazio su una scheda selezionata con Tab | Espande o riduce il ramo da tastiera |
+| Trascinamento dello sfondo | Sposta il diagramma |
+| Rotella del mouse oppure `+` e `-` | Aumenta o riduce lo zoom |
+| **Adatta** | Ricentra il diagramma e adatta la larghezza al canvas |
+| **Espandi tutto** / **Chiudi tutto** | Apre o chiude tutti i rami |
+| **Ctrl+K** oppure **Cmd+K** | Porta il cursore nella ricerca |
+| **Copia** | Copia il contenuto dell'editor come JSON formattato |
+
+Sono supportati anche documenti con una radice array o un valore singolo,
+oggetti e array vuoti, booleani e `null`. Un JSON non valido produce un messaggio
+d'errore; riga e colonna vengono mostrate quando disponibili dal parser.
+
+## Versione browser
+
+Apri `index.html` in un browser moderno: non sono richieste compilazione o
+dipendenze per usare il visualizzatore.
+
+Il pulsante **Apri file** consente di selezionare un documento locale. La versione
+browser non registra associazioni Windows: per usare **Apri con** installa la
+versione desktop.
+
+La copia negli appunti dipende dai permessi e dal contesto di sicurezza del
+browser. Se non funziona aprendo direttamente `index.html`, puoi servire la
+cartella su localhost, ad esempio con Python:
+
+```powershell
+python -m http.server 8765 --bind 127.0.0.1
+```
+
+Poi apri <http://127.0.0.1:8765>.
+
+## Sviluppo e creazione dell'installer
+
+Per avviare la versione desktop dal codice sorgente servono Node.js e npm.
+Esegui questi comandi dalla cartella del progetto:
+
+```powershell
+npm ci
+npm start
+```
+
+Per controllare la sintassi JavaScript:
+
+```powershell
+npm run check
+```
+
+Per generare l'installer su Windows:
+
+```powershell
+npm run dist:win
+```
+
+I risultati vengono scritti in `dist`:
+
+| Percorso | Contenuto |
+| --- | --- |
+| `dist\JSON Explorer Setup 1.0.0.exe` | Installer Windows |
+| `dist\win-unpacked\JSON Explorer.exe` | Applicazione desktop eseguibile senza installazione, da mantenere con tutti i file della stessa cartella |
+
+`dist` e `node_modules` sono esclusi da Git. Il sorgente desktop e' incluso
+nel repository. Una copia dell'installer e lo ZIP dei sorgenti sono inclusi in
+[`installers`](installers) tramite **Git LFS**, perche' l'eseguibile supera il
+limite dei normali file Git. Per scaricarli senza Git LFS puoi usare gli allegati
+delle [Release GitHub](https://github.com/seriousjoker-pro/JSON-viewer/releases).
+
+Se cloni il repository, installa [Git LFS](https://git-lfs.com/) e scarica i
+file binari:
+
+```powershell
+git lfs install
+git lfs pull
+```
+
+Lo ZIP dei sorgenti non contiene `node_modules`: dopo averlo estratto, usa
+`npm ci` e `npm start`, oppure `npm run dist:win` per ricreare l'installer.
+L'installer `.exe`, invece, contiene il necessario per eseguire l'app e non
+richiede Node.js.
+
+### Struttura del codice
+
+| File o cartella | Responsabilita' |
+| --- | --- |
+| `index.html` | Interfaccia condivisa da browser e desktop |
+| `styles.css` | Tema, layout e stile del diagramma |
+| `app.js` | Parsing, nodi SVG, ricerca, zoom e interazioni |
+| `desktop/main.cjs` | Finestra Electron e apertura dei file passati dal sistema |
+| `desktop/preload.cjs` | Comunicazione isolata fra Electron e interfaccia |
+| `package.json` | Comandi npm, dipendenze e configurazione installer/associazione `.json` |
+| `docs/images` | Schermate dell'app utilizzate in questa guida |
+| `installers` | Installer Windows e archivio dei sorgenti tracciati con Git LFS |
+
+## Verifica manuale della versione desktop
+
+Prima di utilizzare l'app come visualizzatore predefinito, verifica questi
+passaggi sulla tua macchina:
+
+- Installa l'app, avviala e apri un JSON con **Apri file**.
+- Apri un `.json` da **Apri con** a programma chiuso e poi gia' aperto.
+- Espandi e richiudi i singoli rami; prova ricerca, zoom e trascinamento.
+- Carica un JSON non valido e verifica che venga segnalato l'errore.
+- Prova la disinstallazione e controlla che i tuoi documenti siano rimasti intatti.
+
+## Privacy e limiti attuali
+
+Il contenuto dei JSON viene letto e analizzato localmente sul dispositivo:
+non viene caricato su un server. Il foglio di stile richiede i font a Google
+Fonts; senza connessione vengono usati i font di sistema.
+
+Il diagramma non usa ancora la virtualizzazione: documenti molto grandi o
+profondamente annidati possono rallentare il rendering. Non sono previsti
+salvataggio su file, sincronizzazione o ripristino automatico delle modifiche
+alla chiusura dell'app.
+
+## Licenza
+
+Copyright (c) 2026 Marco Paleari.
+
+Distribuito con [licenza MIT](LICENSE): sono consentiti uso, modifica e
+ridistribuzione, anche commerciale, mantenendo l'avviso di copyright e la
+licenza. Il software viene fornito senza garanzie.
