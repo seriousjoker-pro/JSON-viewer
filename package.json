@@ -1,0 +1,50 @@
+{
+  "name": "json-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive JSON explorer for the browser and Windows desktop",
+  "author": "Marco Paleari",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seriousjoker-pro/JSON-viewer.git"
+  },
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis --publish never",
+    "check": "node --check app.js && node --check desktop/main.cjs && node --check desktop/preload.cjs"
+  },
+  "build": {
+    "appId": "it.jsonexplorer.desktop",
+    "productName": "JSON Explorer",
+    "files": [
+      "index.html",
+      "styles.css",
+      "app.js",
+      "desktop/**/*"
+    ],
+    "fileAssociations": [
+      {
+        "ext": "json",
+        "name": "JSON Document",
+        "description": "JSON data file",
+        "role": "Editor"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "devDependencies": {
+    "electron": "^44.7.2",
+    "electron-builder": "^26.15.3"
+  }
+}

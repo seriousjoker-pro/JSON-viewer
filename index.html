@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Esplora e visualizza i tuoi dati JSON come un diagramma interattivo, direttamente nel browser."
+    />
+    <title>JSON Explorer — visualizzatore interattivo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="JSON Explorer, home">
+        <span class="brand-mark" aria-hidden="true">{ }</span>
+        <span>json<span class="brand-accent">explorer</span></span>
+      </a>
+      <div class="topbar-note">
+        <span class="status-dot" aria-hidden="true"></span>
+        I tuoi dati restano sul dispositivo
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">JSON, finalmente leggibile</p>
+          <h1>Esplora i dati, <span>un nodo alla volta.</span></h1>
+          <p class="intro-copy">
+            Incolla o carica un JSON e trasformalo in una struttura interattiva.
+            Espandi gli oggetti, cerca una proprietà e segui ogni percorso.
+          </p>
+        </div>
+        <div class="intro-badge" aria-hidden="true">
+          <span class="badge-orbit orbit-one"></span>
+          <span class="badge-orbit orbit-two"></span>
+          <span class="badge-core">{ }</span>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Editor e visualizzatore JSON">
+        <section class="panel editor-panel" aria-labelledby="editor-title">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">01 / SORGENTE</p>
+              <h2 id="editor-title">Il tuo JSON</h2>
+            </div>
+            <label class="icon-button upload-button" for="file-input" title="Apri un file JSON">
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M10 13V3m0 0L6.5 6.5M10 3l3.5 3.5M4 12v4h12v-4" />
+              </svg>
+              <span>Apri file</span>
+            </label>
+            <input id="file-input" type="file" accept=".json,application/json" hidden />
+          </div>
+
+          <label class="sr-only" for="json-input">Inserisci o modifica il JSON</label>
+          <textarea
+            id="json-input"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            aria-describedby="editor-hint"
+          ></textarea>
+          <div class="editor-footer">
+            <span id="editor-hint">JSON standard · modifica qui i tuoi dati</span>
+            <span id="source-size">0 caratteri</span>
+          </div>
+          <button class="primary-button" id="render-button" type="button">
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path d="m7 4 9 6-9 6V4Z" />
+            </svg>
+            Visualizza struttura
+          </button>
+          <p class="message" id="parse-message" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="panel visual-panel" aria-labelledby="visual-title">
+          <div class="visual-heading">
+            <div class="panel-heading visual-title-row">
+              <div>
+                <p class="panel-kicker">02 / VISUALIZZAZIONE</p>
+                <h2 id="visual-title">Struttura dati</h2>
+              </div>
+              <div class="tree-actions">
+                <button class="text-button" id="collapse-button" type="button">Chiudi tutto</button>
+                <span class="action-divider" aria-hidden="true"></span>
+                <button class="text-button" id="expand-button" type="button">Espandi tutto</button>
+              </div>
+            </div>
+            <div class="tree-toolbar">
+              <label class="search-box">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <circle cx="8.7" cy="8.7" r="5.7" />
+                  <path d="m13 13 4 4" />
+                </svg>
+                <span class="sr-only">Cerca in struttura</span>
+                <input id="search-input" type="search" placeholder="Cerca chiave o valore…" />
+                <kbd>Ctrl K</kbd>
+              </label>
+              <button class="icon-button copy-button" id="copy-button" type="button" title="Copia JSON formattato">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <rect x="7" y="6" width="10" height="12" rx="2" />
+                  <path d="M13 6V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2" />
+                </svg>
+                <span>Copia</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="tree-meta">
+            <span id="tree-summary">Pronto per esplorare</span>
+            <span id="result-count" aria-live="polite"></span>
+          </div>
+          <div class="tree-scroll">
+            <div id="tree" class="tree" aria-live="polite"></div>
+            <div id="empty-state" class="empty-state" hidden>
+              <span class="empty-icon" aria-hidden="true">⌕</span>
+              <p>Nessun risultato trovato</p>
+              <span>Prova un'altra chiave o un altro valore.</span>
+            </div>
+          </div>
+          <div class="visual-footer">
+            <span><i class="legend-dot object-dot"></i> Oggetto</span>
+            <span><i class="legend-dot array-dot"></i> Array</span>
+            <span><i class="legend-dot value-dot"></i> Valore</span>
+            <span class="privacy-note">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <rect x="3" y="7" width="10" height="7" rx="1.5" />
+                <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" />
+              </svg>
+              Locale e privato
+            </span>
+          </div>
+        </section>
+      </section>
+      <footer class="page-footer">Un modo più chiaro di leggere i tuoi JSON.</footer>
+    </main>
+  </body>
+</html>
