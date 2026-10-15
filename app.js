@@ -27,6 +27,10 @@ const summary = document.querySelector("#tree-summary");
 const resultCount = document.querySelector("#result-count");
 const emptyState = document.querySelector("#empty-state");
 const sourceSize = document.querySelector("#source-size");
+const visualPanel = document.querySelector(".visual-panel");
+const fullscreenButton = document.querySelector("#fullscreen-button");
+const fullscreenLabel = document.querySelector("#fullscreen-label");
+const fullscreenMessage = document.querySelector("#fullscreen-message");
 const expandedPaths = new Set(["$"]);
 const cardWidth = 246;
 const cardHeight = 82;
@@ -41,6 +45,76 @@ let searchVisible = null;
 let dragState = null;
 let suppressGraphClick = false;
 let renderFrame = 0;
+let renderedSource = "";
+let sourceRanges = new Map();
+let pendingSourceNode = null;
+
+function indexSourceRanges(source) {
+  // Token offsets refer to the original text, including whitespace and escaped keys.
+  const tokens = [...source.matchAll(/"(?:\\[\s\S]|[^"\\])*"|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|true|false|null|[{}[\],:]/g)];
+  const ranges = new Map();
+  let cursor = 0;
+  function readValue(path) {
+    const first = tokens[cursor++];
+    if (first[0] === "{" || first[0] === "[") {
+      const isArray = first[0] === "[";
+      const closing = isArray ? "]" : "}";
+      let index = 0;
+      while (tokens[cursor][0] !== closing) {
+        let key = String(index++);
+        if (!isArray) {
+          key = JSON.parse(tokens[cursor++][0]);
+          cursor += 1;
+        }
+        readValue(getPath(path, key, isArray));
+        if (tokens[cursor][0] === ",") cursor += 1;
+      }
+      cursor += 1;
+    }
+    const last = tokens[cursor - 1];
+    ranges.set(path, { start: first.index, end: last.index + last[0].length });
+  }
+  readValue("$");
+  return ranges;
+}
+
+function revealSourceValue(node) {
+  const isFullscreen = document.fullscreenElement === visualPanel
+    || visualPanel.classList.contains("panel-fullscreen");
+  if (input.value !== renderedSource) {
+    message.className = "message error";
+    message.textContent = "Il testo è cambiato: premi Visualizza struttura per aggiornare i collegamenti alle righe.";
+    return;
+  }
+  const range = sourceRanges.get(node.path);
+  if (!range) return;
+  if (!isFullscreen) input.focus({ preventScroll: true });
+  input.setSelectionRange(range.start, range.end);
+  if (isFullscreen) {
+    pendingSourceNode = node;
+    return;
+  }
+  pendingSourceNode = null;
+  const before = renderedSource.slice(0, range.start);
+  const line = before.split("\n").length;
+  const style = window.getComputedStyle(input);
+  const lineHeight = Number.parseFloat(style.lineHeight);
+  input.scrollTop = Math.max(0, (line - 1) * lineHeight - input.clientHeight / 2 + lineHeight);
+  const column = range.start - before.lastIndexOf("\n") - 1;
+  input.scrollLeft = Math.max(0, column * Number.parseFloat(style.fontSize) * 0.6 - input.clientWidth / 2);
+  input.scrollIntoView({ block: "nearest", inline: "nearest" });
+  message.className = "message success";
+  message.textContent = `${node.path} · Riga ${line}`;
+}
+
+function activateNode(node) {
+  if (!node) return;
+  if (node.isContainer && node.children.length) {
+    setExpanded(node, !node.expanded);
+    renderGraph({ center: node });
+  }
+  revealSourceValue(node);
+}
 
 function formatSourceSize() {
   const length = input.value.length;
@@ -322,15 +396,24 @@ function fitGraph() {
   applyCamera();
 }
 
-function renderGraph({ fit = false } = {}) {
+function renderGraph({ fit = false, anchor = null, center = null } = {}) {
   if (!rootNode) return;
   const visibleRoot = !searchVisible || searchVisible.has(rootNode.path);
   emptyState.hidden = visibleRoot;
   graph.replaceChildren();
   if (!visibleRoot) return;
 
+  const anchorPosition = anchor ? { x: anchor.x, y: anchor.y } : null;
   measureSubtree(rootNode);
   placeNodes(rootNode, 0, graphPadding);
+  if (anchorPosition) {
+    camera.x += (anchorPosition.x - anchor.x) * camera.scale;
+    camera.y += (anchorPosition.y - anchor.y) * camera.scale;
+  }
+  if (center) {
+    camera.x = graphCanvas.clientWidth / 2 - (center.x + cardWidth / 2) * camera.scale;
+    camera.y = graphCanvas.clientHeight / 2 - center.y * camera.scale;
+  }
   const nodes = collectVisibleNodes(rootNode);
   const maxDepth = Math.max(...nodes.map((node) => Math.round((node.x - graphPadding) / (cardWidth + columnGap))));
   graphSize = {
@@ -352,6 +435,7 @@ function renderGraph({ fit = false } = {}) {
 }
 
 function renderJson() {
+  pendingSourceNode = null;
   formatSourceSize();
   let data;
   try {
@@ -372,6 +456,8 @@ function renderJson() {
 
   expandedPaths.clear();
   expandedPaths.add("$");
+  renderedSource = input.value;
+  sourceRanges = indexSourceRanges(renderedSource);
   rootNode = buildNode("$", data, "$");
   searchInput.value = "";
   searchMatches = new Set();
@@ -446,13 +532,13 @@ searchInput.addEventListener("input", applySearch);
 document.querySelector("#expand-button").addEventListener("click", () => {
   if (!rootNode) return;
   for (const node of collectAllNodes(rootNode)) setExpanded(node, true);
-  renderGraph({ fit: true });
+  renderGraph({ anchor: rootNode });
 });
 
 document.querySelector("#collapse-button").addEventListener("click", () => {
   if (!rootNode) return;
   for (const node of collectAllNodes(rootNode)) setExpanded(node, false);
-  renderGraph({ fit: true });
+  renderGraph({ anchor: rootNode });
 });
 
 function collectAllNodes(node, nodes = []) {
@@ -469,9 +555,7 @@ graph.addEventListener("click", (event) => {
   const nodeElement = event.target.closest(".graph-node");
   if (!nodeElement || !rootNode) return;
   const node = findNode(rootNode, nodeElement.dataset.path);
-  if (!node?.isContainer || !node.children.length) return;
-  setExpanded(node, !node.expanded);
-  renderGraph({ fit: true });
+  activateNode(node);
 });
 
 graph.addEventListener("keydown", (event) => {
@@ -480,9 +564,7 @@ graph.addEventListener("keydown", (event) => {
   if (!nodeElement || !rootNode) return;
   event.preventDefault();
   const node = findNode(rootNode, nodeElement.dataset.path);
-  if (!node?.isContainer || !node.children.length) return;
-  setExpanded(node, !node.expanded);
-  renderGraph({ fit: true });
+  activateNode(node);
 });
 
 graphCanvas.addEventListener("pointerdown", (event) => {
@@ -531,10 +613,60 @@ graphCanvas.addEventListener("wheel", (event) => {
 document.querySelector("#zoom-in").addEventListener("click", () => zoomAt(1.2));
 document.querySelector("#zoom-out").addEventListener("click", () => zoomAt(0.83));
 document.querySelector("#fit-graph").addEventListener("click", fitGraph);
-window.addEventListener("resize", () => {
+
+function scheduleGraphResize() {
   window.cancelAnimationFrame(renderFrame);
   renderFrame = window.requestAnimationFrame(() => renderGraph({ fit: true }));
+}
+
+function updateFullscreenState() {
+  const active = document.fullscreenElement === visualPanel
+    || visualPanel.classList.contains("panel-fullscreen");
+  fullscreenButton.setAttribute("aria-pressed", String(active));
+  const label = active ? "Esci da schermo intero" : "Schermo intero";
+  fullscreenLabel.textContent = label;
+  fullscreenButton.setAttribute("aria-label", label);
+  fullscreenButton.title = label;
+  document.body.classList.toggle("has-fullscreen-panel", active);
+  scheduleGraphResize();
+  if (!active && pendingSourceNode) {
+    const node = pendingSourceNode;
+    pendingSourceNode = null;
+    window.requestAnimationFrame(() => revealSourceValue(node));
+  }
+}
+
+fullscreenButton.addEventListener("click", async () => {
+  fullscreenMessage.hidden = true;
+  try {
+    if (document.fullscreenElement === visualPanel) {
+      await document.exitFullscreen();
+    } else if (visualPanel.classList.contains("panel-fullscreen")) {
+      visualPanel.classList.remove("panel-fullscreen");
+      updateFullscreenState();
+    } else if (document.fullscreenEnabled && visualPanel.requestFullscreen) {
+      await visualPanel.requestFullscreen();
+    } else {
+      visualPanel.classList.add("panel-fullscreen");
+      updateFullscreenState();
+    }
+  } catch (error) {
+    console.error("Impossibile cambiare la visualizzazione a schermo intero.", error);
+    fullscreenMessage.textContent = "Impossibile attivare lo schermo intero. Verifica i permessi del browser.";
+    fullscreenMessage.hidden = false;
+  }
 });
+
+document.addEventListener("fullscreenchange", updateFullscreenState);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && visualPanel.classList.contains("panel-fullscreen")) {
+    visualPanel.classList.remove("panel-fullscreen");
+    updateFullscreenState();
+    fullscreenButton.focus();
+  }
+});
+window.addEventListener("resize", scheduleGraphResize);
+new ResizeObserver(scheduleGraphResize).observe(graphCanvas);
 
 document.querySelector("#copy-button").addEventListener("click", async () => {
   try {

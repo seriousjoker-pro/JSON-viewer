@@ -10,6 +10,29 @@ parentesi. Disponibile come applicazione **desktop Windows** e come **web app**.
 | [Guida ai controlli](#esplorare-un-json)
 | [Licenza MIT](LICENSE)
 
+## Novita' della versione 1.1.0
+
+**Migliorie**
+
+- Pannello di visualizzazione a schermo intero, con ricerca e controlli ancora
+  disponibili; uscita tramite pulsante o Esc.
+- Collegamento fra diagramma ed editor: un clic su una scheda seleziona il valore
+  esatto e porta la relativa riga in vista, anche con valori ripetuti o chiavi
+  contenenti caratteri speciali.
+- Selezione del codice anche a schermo intero: all'uscita viene mostrata
+  nell'editor l'ultima riga scelta.
+- Apertura e chiusura dei rami con centratura sulla scheda selezionata,
+  mantenendo lo zoom corrente.
+
+**Correzioni**
+
+- Il cambio di stato di un ramo non reimposta piu' lo zoom sull'intero grafo.
+- Il trascinamento del canvas non seleziona piu' il testo delle schede;
+  editor e campo di ricerca conservano la selezione del testo.
+- Se il JSON e' stato modificato dopo la generazione del diagramma, viene
+  richiesto di aggiornarlo anziche' selezionare una posizione non piu' valida.
+- Il diagramma si ridimensiona quando cambia lo spazio disponibile nel pannello.
+
 ## Anteprima
 
 ![Editor JSON e diagramma interattivo con nodi collegati](docs/images/json-explorer-overview.png)
@@ -27,13 +50,31 @@ una prova manuale.
 Non serve installare Node.js per utilizzare la versione desktop distribuita.
 
 1. Apri la pagina [Release](https://github.com/seriousjoker-pro/JSON-viewer/releases).
-2. Nella sezione **Assets**, scarica `JSON Explorer Setup 1.0.0.exe`.
+2. Nella sezione **Assets**, scarica l'installer **1.1.0** (`JSON Explorer Setup 1.1.0.exe`;
+   GitHub puo' visualizzarne il nome con punti al posto degli spazi).
 3. Esegui l'installer e scegli la cartella di installazione.
 4. Avvia **JSON Explorer** e usa **Apri file** per caricare un documento `.json`.
 
 L'installer attuale e' per Windows x64. Non dispone di un certificato di firma
 digitale dell'autore: Windows potrebbe mostrare un avviso relativo a un autore
 sconosciuto.
+
+### Aggiornare una versione gia' installata
+
+1. Prima di chiudere l'app, recupera con **Copia** eventuali modifiche al JSON:
+   non vengono salvate automaticamente.
+2. Chiudi JSON Explorer.
+3. Scarica il nuovo installer dalla pagina
+   [Release](https://github.com/seriousjoker-pro/JSON-viewer/releases).
+4. Eseguilo con lo stesso account Windows e mantieni la stessa cartella
+   d'installazione usata in precedenza. Non serve disinstallare prima.
+5. Riapri l'app e verifica la presenza del pulsante **Schermo intero**.
+
+Non e' presente un aggiornamento automatico: ogni nuova versione va installata
+manualmente. I documenti `.json` originali non vengono modificati. Se Windows
+non mantiene l'app predefinita, selezionala nuovamente nelle impostazioni.
+L'aggiornamento sopra la versione precedente richiede ancora una verifica
+manuale sul PC dell'utente.
 
 ### Usare "Apri con" e impostare l'app predefinita
 
@@ -65,13 +106,21 @@ per recuperare il JSON formattato.
 | Controllo | Funzione |
 | --- | --- |
 | Clic su un oggetto o array non vuoto | Espande o riduce il singolo ramo |
+| Clic su una scheda | Seleziona il valore nel JSON a sinistra e porta la riga in vista, anche all'uscita dallo schermo intero; se il testo e' stato modificato, occorre prima aggiornare la struttura |
 | Invio o Spazio su una scheda selezionata con Tab | Espande o riduce il ramo da tastiera |
 | Trascinamento dello sfondo | Sposta il diagramma |
 | Rotella del mouse oppure `+` e `-` | Aumenta o riduce lo zoom |
 | **Adatta** | Ricentra il diagramma e adatta la larghezza al canvas |
+| **Schermo intero** | Mostra solo il pannello di visualizzazione, con ricerca e controlli; premi Esc o **Esci da schermo intero** per tornare alla vista normale |
 | **Espandi tutto** / **Chiudi tutto** | Apre o chiude tutti i rami |
 | **Ctrl+K** oppure **Cmd+K** | Porta il cursore nella ricerca |
 | **Copia** | Copia il contenuto dell'editor come JSON formattato |
+
+Aprire o chiudere un ramo centra la scheda selezionata nel pannello, mantenendo
+lo zoom corrente. I comandi **Espandi tutto** e **Chiudi tutto** mantengono
+come riferimento la radice. Usa **Adatta** per ricentrare esplicitamente la vista.
+Il trascinamento sul canvas non seleziona il testo delle schede; la selezione
+nei campi di ricerca e nell'editor rimane disponibile.
 
 Sono supportati anche documenti con una radice array o un valore singolo,
 oggetti e array vuoti, booleani e `null`. Un JSON non valido produce un messaggio
@@ -85,6 +134,9 @@ dipendenze per usare il visualizzatore.
 Il pulsante **Apri file** consente di selezionare un documento locale. La versione
 browser non registra associazioni Windows: per usare **Apri con** installa la
 versione desktop.
+
+Il pulsante **Schermo intero** usa la modalita' nativa quando disponibile;
+nei contesti che non la supportano, il pannello occupa l'intera area della pagina.
 
 La copia negli appunti dipende dai permessi e dal contesto di sicurezza del
 browser. Se non funziona aprendo direttamente `index.html`, puoi servire la
@@ -122,7 +174,7 @@ I risultati vengono scritti in `dist`:
 
 | Percorso | Contenuto |
 | --- | --- |
-| `dist\JSON Explorer Setup 1.0.0.exe` | Installer Windows |
+| `dist\JSON Explorer Setup 1.1.0.exe` | Installer Windows |
 | `dist\win-unpacked\JSON Explorer.exe` | Applicazione desktop eseguibile senza installazione, da mantenere con tutti i file della stessa cartella |
 
 `dist` e `node_modules` sono esclusi da Git. Il sorgente desktop e' incluso

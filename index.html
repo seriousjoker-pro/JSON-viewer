@@ -59,6 +59,7 @@
           <label class="sr-only" for="json-input">Inserisci o modifica il JSON</label>
           <textarea
             id="json-input"
+            wrap="off"
             spellcheck="false"
             autocapitalize="off"
             autocomplete="off"
@@ -107,7 +108,14 @@
                 </svg>
                 <span>Copia</span>
               </button>
+              <button class="icon-button" id="fullscreen-button" type="button" aria-pressed="false" title="Visualizzazione a schermo intero">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4" />
+                </svg>
+                <span id="fullscreen-label">Schermo intero</span>
+              </button>
             </div>
+            <p id="fullscreen-message" class="message error" role="status" hidden></p>
           </div>
           <div class="tree-meta">
             <span id="tree-summary">Pronto per esplorare</span>
