@@ -18,6 +18,201 @@ const sampleData = {
   },
 };
 
+const translations = {
+  it: {
+    metaDescription: "Esplora e visualizza i tuoi dati JSON come un diagramma interattivo, direttamente nel browser.",
+    documentTitle: "JSON Explorer — visualizzatore interattivo",
+    languageLabel: "Lingua dell'interfaccia",
+    privacyTopNote: "I tuoi dati restano sul dispositivo",
+    eyebrow: "JSON, finalmente leggibile",
+    headline: "Esplora i dati,",
+    headlineHighlight: "un nodo alla volta.",
+    introCopy: "Incolla o carica un JSON e trasformalo in una struttura interattiva. Espandi gli oggetti, cerca una proprietà e segui ogni percorso.",
+    workspaceLabel: "Editor e visualizzatore JSON",
+    sourceKicker: "01 / SORGENTE",
+    yourJson: "Il tuo JSON",
+    openFile: "Apri file",
+    editorLabel: "Inserisci o modifica il JSON",
+    editorHint: "JSON standard · modifica qui i tuoi dati",
+    renderStructure: "Visualizza struttura",
+    visualizationKicker: "02 / VISUALIZZAZIONE",
+    dataStructure: "Struttura dati",
+    collapseAll: "Chiudi tutto",
+    expandAll: "Espandi tutto",
+    searchLabel: "Cerca in struttura",
+    searchPlaceholder: "Cerca chiave o valore…",
+    copyJson: "Copia JSON formattato",
+    copy: "Copia",
+    fullscreen: "Schermo intero",
+    ready: "Pronto per esplorare",
+    graphLabel: "Diagramma interattivo della struttura JSON",
+    noResults: "Nessun risultato trovato",
+    tryAnotherSearch: "Prova un'altra chiave o un altro valore.",
+    canvasControls: "Controlli del diagramma",
+    zoomOut: "Riduci zoom",
+    zoomIn: "Aumenta zoom",
+    fitGraph: "Adatta",
+    fitGraphLabel: "Centra e adatta diagramma",
+    canvasHint: "Trascina per spostarti · rotella per zoom",
+    object: "Oggetto",
+    value: "Valore",
+    localPrivate: "Locale e privato",
+    pageFooter: "Un modo più chiaro di leggere i tuoi JSON.",
+    textChanged: "Il testo è cambiato: premi Visualizza struttura per aggiornare i collegamenti alle righe.",
+    pathLine: "{path} · Riga {line}",
+    character: "{count} caratter{suffix}",
+    invalidJson: "JSON non valido",
+    parseError: "JSON non valido alla riga {line}, colonna {column}. {detail}",
+    parseErrorRaw: "JSON non valido: {detail}",
+    root: "Radice",
+    arrayPreview: "Lista di elementi",
+    objectPreview: "Oggetto con proprietà",
+    item: "elemento",
+    items: "elementi",
+    collapse: "Riduci",
+    expand: "Espandi",
+    path: "Percorso",
+    structureUpdated: "Struttura aggiornata.",
+    stats: "{objects} oggetti · {arrays} array · {values} valori",
+    result: "risultato",
+    results: "risultati",
+    exitFullscreen: "Esci da schermo intero",
+    fullscreenConsoleError: "Impossibile cambiare la visualizzazione a schermo intero.",
+    fullscreenError: "Impossibile attivare lo schermo intero. Verifica i permessi del browser.",
+    copySuccess: "JSON formattato copiato negli appunti.",
+    clipboardError: "Impossibile accedere agli appunti. Verifica i permessi del browser.",
+    readFileError: "Impossibile leggere il file selezionato.",
+    fileLoaded: "File caricato: {name}",
+    fileErrorWithName: "{detail} (file: {name})",
+    openFileError: "Impossibile aprire il file \"{name}\". Verifica che esista e che sia leggibile.",
+  },
+  en: {
+    metaDescription: "Explore and visualize your JSON data as an interactive diagram, right in your browser.",
+    documentTitle: "JSON Explorer — interactive viewer",
+    languageLabel: "Interface language",
+    privacyTopNote: "Your data stays on your device",
+    eyebrow: "JSON, finally readable",
+    headline: "Explore your data,",
+    headlineHighlight: "one node at a time.",
+    introCopy: "Paste or load JSON and turn it into an interactive structure. Expand objects, search for a property, and follow every path.",
+    workspaceLabel: "JSON editor and viewer",
+    sourceKicker: "01 / SOURCE",
+    yourJson: "Your JSON",
+    openFile: "Open file",
+    editorLabel: "Enter or edit JSON",
+    editorHint: "Standard JSON · edit your data here",
+    renderStructure: "View structure",
+    visualizationKicker: "02 / VISUALIZATION",
+    dataStructure: "Data structure",
+    collapseAll: "Collapse all",
+    expandAll: "Expand all",
+    searchLabel: "Search structure",
+    searchPlaceholder: "Search key or value…",
+    copyJson: "Copy formatted JSON",
+    copy: "Copy",
+    fullscreen: "Full screen",
+    ready: "Ready to explore",
+    graphLabel: "Interactive diagram of the JSON structure",
+    noResults: "No results found",
+    tryAnotherSearch: "Try another key or value.",
+    canvasControls: "Diagram controls",
+    zoomOut: "Zoom out",
+    zoomIn: "Zoom in",
+    fitGraph: "Fit",
+    fitGraphLabel: "Center and fit diagram",
+    canvasHint: "Drag to pan · scroll to zoom",
+    object: "Object",
+    value: "Value",
+    localPrivate: "Local and private",
+    pageFooter: "A clearer way to read your JSON.",
+    textChanged: "The text has changed: click View structure to update the line references.",
+    pathLine: "{path} · Line {line}",
+    character: "{count} character{suffix}",
+    invalidJson: "Invalid JSON",
+    parseError: "Invalid JSON at line {line}, column {column}. {detail}",
+    parseErrorRaw: "Invalid JSON: {detail}",
+    root: "Root",
+    arrayPreview: "List of items",
+    objectPreview: "Object with properties",
+    item: "item",
+    items: "items",
+    collapse: "Collapse",
+    expand: "Expand",
+    path: "Path",
+    structureUpdated: "Structure updated.",
+    stats: "{objects} objects · {arrays} arrays · {values} values",
+    result: "result",
+    results: "results",
+    exitFullscreen: "Exit full screen",
+    fullscreenConsoleError: "Unable to change the full-screen view.",
+    fullscreenError: "Unable to enter full screen. Check your browser permissions.",
+    copySuccess: "Formatted JSON copied to clipboard.",
+    clipboardError: "Unable to access the clipboard. Check your browser permissions.",
+    readFileError: "Unable to read the selected file.",
+    fileLoaded: "File loaded: {name}",
+    fileErrorWithName: "{detail} (file: {name})",
+    openFileError: "Unable to open file \"{name}\". Check that it exists and is readable.",
+  },
+};
+
+const languageSelect = document.querySelector("#language-select");
+let language = "it";
+let currentMessage = null;
+let invalidJson = false;
+let openedFileName = null;
+let fullscreenError = false;
+
+function translate(key, values = {}) {
+  if (key === "fileErrorWithName" && values.prior) {
+    values = { ...values, detail: translate(values.prior.key, values.prior.values) };
+  }
+  return translations[language][key].replace(/\{(\w+)\}/g, (_, name) => values[name]);
+}
+
+function applyTranslations() {
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.textContent = translate(element.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-content]").forEach((element) => {
+    element.content = translate(element.dataset.i18nContent);
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+    element.placeholder = translate(element.dataset.i18nPlaceholder);
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+    element.title = translate(element.dataset.i18nTitle);
+  });
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+    element.setAttribute("aria-label", translate(element.dataset.i18nAriaLabel));
+  });
+  document.querySelector("#headline-highlight").textContent = translate("headlineHighlight");
+  document.title = openedFileName ? `${openedFileName} — JSON Explorer` : translate("documentTitle");
+  updateFullscreenLabel();
+  if (fullscreenError) fullscreenMessage.textContent = translate("fullscreenError");
+  formatSourceSize();
+  if (currentMessage) {
+    message.className = `message ${currentMessage.type}`;
+    message.textContent = translate(currentMessage.key, currentMessage.values);
+  }
+  if (rootNode) {
+    const stats = getStats(rootNode.value);
+    summary.textContent = translate("stats", stats);
+    renderGraph();
+  } else if (invalidJson) {
+    summary.textContent = translate("invalidJson");
+  }
+  if (searchInput.value.trim()) {
+    resultCount.textContent = `${searchMatches.size} ${translate(searchMatches.size === 1 ? "result" : "results")}`;
+  }
+}
+
+function showMessage(key, type, values = {}) {
+  currentMessage = { key, type, values };
+  message.className = `message ${type}`;
+  message.textContent = translate(key, values);
+}
+
 const input = document.querySelector("#json-input");
 const graphCanvas = document.querySelector("#graph-canvas");
 const graph = document.querySelector("#graph");
@@ -82,8 +277,7 @@ function revealSourceValue(node) {
   const isFullscreen = document.fullscreenElement === visualPanel
     || visualPanel.classList.contains("panel-fullscreen");
   if (input.value !== renderedSource) {
-    message.className = "message error";
-    message.textContent = "Il testo è cambiato: premi Visualizza struttura per aggiornare i collegamenti alle righe.";
+    showMessage("textChanged", "error");
     return;
   }
   const range = sourceRanges.get(node.path);
@@ -103,8 +297,7 @@ function revealSourceValue(node) {
   const column = range.start - before.lastIndexOf("\n") - 1;
   input.scrollLeft = Math.max(0, column * Number.parseFloat(style.fontSize) * 0.6 - input.clientWidth / 2);
   input.scrollIntoView({ block: "nearest", inline: "nearest" });
-  message.className = "message success";
-  message.textContent = `${node.path} · Riga ${line}`;
+  showMessage("pathLine", "success", { path: node.path, line });
 }
 
 function activateNode(node) {
@@ -118,7 +311,11 @@ function activateNode(node) {
 
 function formatSourceSize() {
   const length = input.value.length;
-  sourceSize.textContent = `${length.toLocaleString("it-IT")} caratter${length === 1 ? "e" : "i"}`;
+  const suffix = language === "it" ? (length === 1 ? "e" : "i") : (length === 1 ? "" : "s");
+  sourceSize.textContent = translate("character", {
+    count: length.toLocaleString(language === "it" ? "it-IT" : "en-US"),
+    suffix,
+  });
 }
 
 function getType(value) {
@@ -185,12 +382,12 @@ function getStats(value) {
 
 function getParseError(error, source) {
   const match = error.message.match(/position\s+(\d+)/i);
-  if (!match) return error.message;
+  if (!match) return { key: "parseErrorRaw", values: { detail: error.message } };
   const position = Number(match[1]);
   const beforeError = source.slice(0, position);
   const line = beforeError.split("\n").length;
   const column = position - beforeError.lastIndexOf("\n");
-  return `JSON non valido alla riga ${line}, colonna ${column}. ${error.message}`;
+  return { key: "parseError", values: { line, column, detail: error.message } };
 }
 
 function collectMatches(node, query, matches, visible) {
@@ -229,18 +426,18 @@ function setText(element, text, x, y, className, attributes = {}) {
 }
 
 function getNodeLabel(node) {
-  if (node.path === "$") return "Root";
+  if (node.path === "$") return translate("root");
   return node.isArrayItem ? `[${node.key}]` : node.key;
 }
 
 function getNodePreview(node) {
   if (!node.isContainer) return displayValue(node.value);
-  if (node.type === "array") return "Lista di elementi";
-  return "Oggetto con proprietà";
+  if (node.type === "array") return translate("arrayPreview");
+  return translate("objectPreview");
 }
 
 function getNodeCount(node) {
-  return `${node.children.length} ${node.children.length === 1 ? "elemento" : "elementi"}`;
+  return `${node.children.length} ${translate(node.children.length === 1 ? "item" : "items")}`;
 }
 
 function createCard(node) {
@@ -299,11 +496,11 @@ function createCard(node) {
   group.append(createSvgElement("line", { class: "node-divider", x1: 14, y1: 59, x2: cardWidth - 14, y2: 59 }));
   if (node.isContainer) {
     const action = node.children.length
-      ? `${node.expanded ? "−" : "+"}  ${node.expanded ? "Riduci" : "Espandi"} · ${getNodeCount(node)}`
+      ? `${node.expanded ? "−" : "+"}  ${translate(node.expanded ? "collapse" : "expand")} · ${getNodeCount(node)}`
       : getNodeCount(node);
     setText(group, action, 17, 74, "node-footnote");
   } else {
-    setText(group, `Percorso  ${truncateText(node.path, 29)}`, 17, 74, "node-footnote");
+    setText(group, `${translate("path")}  ${truncateText(node.path, 29)}`, 17, 74, "node-footnote");
   }
   return group;
 }
@@ -446,11 +643,12 @@ function renderJson() {
     searchInput.value = "";
     searchMatches = new Set();
     searchVisible = null;
-    summary.textContent = "JSON non valido";
+    invalidJson = true;
+    summary.textContent = translate("invalidJson");
     resultCount.textContent = "";
     emptyState.hidden = true;
-    message.className = "message error";
-    message.textContent = getParseError(error, input.value);
+    const parseError = getParseError(error, input.value);
+    showMessage(parseError.key, "error", parseError.values);
     return;
   }
 
@@ -463,10 +661,10 @@ function renderJson() {
   searchMatches = new Set();
   searchVisible = null;
   resultCount.textContent = "";
-  message.className = "message success";
-  message.textContent = "Struttura aggiornata.";
+  invalidJson = false;
+  showMessage("structureUpdated", "success");
   const stats = getStats(data);
-  summary.textContent = `${stats.objects} oggetti · ${stats.arrays} array · ${stats.values} valori`;
+  summary.textContent = translate("stats", stats);
   renderGraph({ fit: true });
 }
 
@@ -487,7 +685,7 @@ function setExpanded(node, expanded) {
 }
 
 function applySearch() {
-  const query = searchInput.value.trim().toLocaleLowerCase("it");
+  const query = searchInput.value.trim().toLocaleLowerCase(language);
   searchMatches = new Set();
   searchVisible = null;
   if (query && rootNode) {
@@ -500,7 +698,7 @@ function applySearch() {
         setExpanded(node, true);
       }
     }
-    resultCount.textContent = `${searchMatches.size} ${searchMatches.size === 1 ? "risultato" : "risultati"}`;
+    resultCount.textContent = `${searchMatches.size} ${translate(searchMatches.size === 1 ? "result" : "results")}`;
   } else {
     resultCount.textContent = "";
     if (rootNode) {
@@ -620,23 +818,31 @@ function scheduleGraphResize() {
 }
 
 function updateFullscreenState() {
-  const active = document.fullscreenElement === visualPanel
-    || visualPanel.classList.contains("panel-fullscreen");
-  fullscreenButton.setAttribute("aria-pressed", String(active));
-  const label = active ? "Esci da schermo intero" : "Schermo intero";
-  fullscreenLabel.textContent = label;
-  fullscreenButton.setAttribute("aria-label", label);
-  fullscreenButton.title = label;
-  document.body.classList.toggle("has-fullscreen-panel", active);
+  updateFullscreenLabel();
+  document.body.classList.toggle(
+    "has-fullscreen-panel",
+    document.fullscreenElement === visualPanel || visualPanel.classList.contains("panel-fullscreen"),
+  );
   scheduleGraphResize();
-  if (!active && pendingSourceNode) {
+  if (!document.fullscreenElement && !visualPanel.classList.contains("panel-fullscreen") && pendingSourceNode) {
     const node = pendingSourceNode;
     pendingSourceNode = null;
     window.requestAnimationFrame(() => revealSourceValue(node));
   }
 }
 
+function updateFullscreenLabel() {
+  const active = document.fullscreenElement === visualPanel
+    || visualPanel.classList.contains("panel-fullscreen");
+  fullscreenButton.setAttribute("aria-pressed", String(active));
+  const label = translate(active ? "exitFullscreen" : "fullscreen");
+  fullscreenLabel.textContent = label;
+  fullscreenButton.setAttribute("aria-label", label);
+  fullscreenButton.title = label;
+}
+
 fullscreenButton.addEventListener("click", async () => {
+  fullscreenError = false;
   fullscreenMessage.hidden = true;
   try {
     if (document.fullscreenElement === visualPanel) {
@@ -651,8 +857,9 @@ fullscreenButton.addEventListener("click", async () => {
       updateFullscreenState();
     }
   } catch (error) {
-    console.error("Impossibile cambiare la visualizzazione a schermo intero.", error);
-    fullscreenMessage.textContent = "Impossibile attivare lo schermo intero. Verifica i permessi del browser.";
+    console.error(translate("fullscreenConsoleError"), error);
+    fullscreenError = true;
+    fullscreenMessage.textContent = translate("fullscreenError");
     fullscreenMessage.hidden = false;
   }
 });
@@ -672,14 +879,14 @@ document.querySelector("#copy-button").addEventListener("click", async () => {
   try {
     const formatted = JSON.stringify(JSON.parse(input.value), null, 2);
     await navigator.clipboard.writeText(formatted);
-    message.className = "message success";
-    message.textContent = "JSON formattato copiato negli appunti.";
+    showMessage("copySuccess", "success");
   } catch (error) {
-    message.className = "message error";
-    message.textContent =
-      error instanceof SyntaxError
-        ? getParseError(error, input.value)
-        : "Impossibile accedere agli appunti. Verifica i permessi del browser.";
+    if (error instanceof SyntaxError) {
+      const parseError = getParseError(error, input.value);
+      showMessage(parseError.key, "error", parseError.values);
+    } else {
+      showMessage("clipboardError", "error");
+    }
   }
 });
 
@@ -691,8 +898,7 @@ document.querySelector("#file-input").addEventListener("change", async (event) =
     formatSourceSize();
     renderJson();
   } catch {
-    message.className = "message error";
-    message.textContent = "Impossibile leggere il file selezionato.";
+    showMessage("readFileError", "error");
   }
   event.target.value = "";
 });
@@ -710,18 +916,31 @@ if (window.jsonExplorer) {
     formatSourceSize();
     renderJson();
     if (message.classList.contains("success")) {
-      message.textContent = `File caricato: ${name}`;
+      showMessage("fileLoaded", "success", { name });
+      openedFileName = name;
       document.title = `${name} — JSON Explorer`;
     } else {
-      message.textContent += ` (file: ${name})`;
+      showMessage("fileErrorWithName", "error", { name, prior: currentMessage });
     }
   });
 
   window.jsonExplorer.onFileError(({ name }) => {
-    message.className = "message error";
-    message.textContent = `Impossibile aprire il file "${name}". Verifica che esista e che sia leggibile.`;
+    showMessage("openFileError", "error", { name });
   });
 }
 
 input.value = JSON.stringify(sampleData, null, 2);
+try {
+  const savedLanguage = localStorage.getItem("json-explorer-language");
+  if (savedLanguage && translations[savedLanguage]) language = savedLanguage;
+} catch {}
+languageSelect.value = language;
+languageSelect.addEventListener("change", () => {
+  language = languageSelect.value;
+  try {
+    localStorage.setItem("json-explorer-language", language);
+  } catch {}
+  applyTranslations();
+});
+applyTranslations();
 renderJson();

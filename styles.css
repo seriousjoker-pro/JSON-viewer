@@ -82,6 +82,23 @@ button {
   color: var(--accent-bright);
 }
 
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+#language-select {
+  min-height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #161a24;
+  color: #a8afbf;
+  cursor: pointer;
+  font-size: 11px;
+}
+
 .topbar-note {
   display: flex;
   align-items: center;
@@ -871,6 +888,10 @@ kbd {
 
   .topbar-note {
     font-size: 10px;
+  }
+
+  .topbar-tools {
+    gap: 10px;
   }
 
   .page {
