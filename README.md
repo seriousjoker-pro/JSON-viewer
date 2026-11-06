@@ -10,6 +10,13 @@ brackets. Available as a **Windows desktop app** and a **web app**.
 | [Controls guide](#exploring-json)
 | [MIT License](LICENSE)
 
+## What's new in version 1.2.0
+
+- Italian and English interface, selectable from the language menu at the top.
+- Language selection is remembered between sessions when local storage is available.
+- Translated diagram labels, controls, status messages, and errors.
+- English documentation and a rebuilt Windows installer containing the localised interface.
+
 ## What's new in version 1.1.0
 
 **Improvements**
@@ -49,7 +56,7 @@ installation and file association on Windows still require manual testing.
 You do not need to install Node.js to use the distributed desktop version.
 
 1. Open the [Releases](https://github.com/seriousjoker-pro/JSON-viewer/releases) page.
-2. Under **Assets**, download the **1.1.0** installer (`JSON Explorer Setup 1.1.0.exe`;
+2. Under **Assets**, download the **1.2.0** installer (`JSON Explorer Setup 1.2.0.exe`;
    GitHub may display its name with periods instead of spaces).
 3. Run the installer and choose an installation folder.
 4. Launch **JSON Explorer** and use **Open file** to load a `.json` document.
@@ -66,7 +73,7 @@ certificate, so Windows may display an unknown publisher warning.
    [Releases](https://github.com/seriousjoker-pro/JSON-viewer/releases) page.
 4. Run it using the same Windows account and keep the same installation folder.
    You do not need to uninstall the previous version first.
-5. Reopen the app and check that the **Full screen** button is available.
+5. Reopen the app and check that the **Italiano / English** language selector is available.
 
 There is no automatic updater, so each new version must be installed manually.
 Original `.json` documents are not modified. If Windows does not retain the app
@@ -174,7 +181,7 @@ Build outputs are written to `dist`:
 
 | Path | Contents |
 | --- | --- |
-| `dist\JSON Explorer Setup 1.1.0.exe` | Windows installer |
+| `dist\JSON Explorer Setup 1.2.0.exe` | Windows installer |
 | `dist\win-unpacked\JSON Explorer.exe` | Desktop app executable that can run without installation; keep all files in the same folder |
 
 `dist` and `node_modules` are excluded from Git. The desktop source is included
