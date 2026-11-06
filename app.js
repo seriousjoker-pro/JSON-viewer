@@ -73,7 +73,13 @@ const translations = {
     expand: "Espandi",
     path: "Percorso",
     structureUpdated: "Struttura aggiornata.",
-    stats: "{objects} oggetti · {arrays} array · {values} valori",
+    stats: "{objects} {objectLabel} · {arrays} array · {values} {valueLabel}",
+    objectSingular: "oggetto",
+    objectPlural: "oggetti",
+    arraySingular: "array",
+    arrayPlural: "array",
+    valueSingular: "valore",
+    valuePlural: "valori",
     result: "risultato",
     results: "risultati",
     exitFullscreen: "Esci da schermo intero",
@@ -140,7 +146,13 @@ const translations = {
     expand: "Expand",
     path: "Path",
     structureUpdated: "Structure updated.",
-    stats: "{objects} objects · {arrays} arrays · {values} values",
+    stats: "{objects} {objectLabel} · {arrays} {arrayLabel} · {values} {valueLabel}",
+    objectSingular: "object",
+    objectPlural: "objects",
+    arraySingular: "array",
+    arrayPlural: "arrays",
+    valueSingular: "value",
+    valuePlural: "values",
     result: "result",
     results: "results",
     exitFullscreen: "Exit full screen",
@@ -197,7 +209,7 @@ function applyTranslations() {
   }
   if (rootNode) {
     const stats = getStats(rootNode.value);
-    summary.textContent = translate("stats", stats);
+    summary.textContent = formatStats(stats);
     renderGraph();
   } else if (invalidJson) {
     summary.textContent = translate("invalidJson");
@@ -211,6 +223,15 @@ function showMessage(key, type, values = {}) {
   currentMessage = { key, type, values };
   message.className = `message ${type}`;
   message.textContent = translate(key, values);
+}
+
+function formatStats(stats) {
+  return translate("stats", {
+    ...stats,
+    objectLabel: translate(stats.objects === 1 ? "objectSingular" : "objectPlural"),
+    arrayLabel: translate(stats.arrays === 1 ? "arraySingular" : "arrayPlural"),
+    valueLabel: translate(stats.values === 1 ? "valueSingular" : "valuePlural"),
+  });
 }
 
 const input = document.querySelector("#json-input");
@@ -664,7 +685,7 @@ function renderJson() {
   invalidJson = false;
   showMessage("structureUpdated", "success");
   const stats = getStats(data);
-  summary.textContent = translate("stats", stats);
+  summary.textContent = formatStats(stats);
   renderGraph({ fit: true });
 }
 

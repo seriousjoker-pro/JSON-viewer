@@ -131,6 +131,9 @@ d'errore; riga e colonna vengono mostrate quando disponibili dal parser.
 Apri `index.html` in un browser moderno: non sono richieste compilazione o
 dipendenze per usare il visualizzatore.
 
+Usa il selettore in alto per passare dall'interfaccia italiana a quella inglese;
+la lingua scelta viene ricordata nel browser.
+
 Il pulsante **Apri file** consente di selezionare un documento locale. La versione
 browser non registra associazioni Windows: per usare **Apri con** installa la
 versione desktop.

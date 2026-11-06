@@ -978,3 +978,13 @@ kbd {
     margin-left: 0;
   }
 }
+
+@media (max-width: 400px) {
+  .topbar-note {
+    gap: 0;
+  }
+
+  .topbar-note > span:not(.status-dot) {
+    display: none;
+  }
+}
