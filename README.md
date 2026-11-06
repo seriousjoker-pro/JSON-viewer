@@ -1,5 +1,7 @@
 # JSON Explorer
 
+[English](README.md) | [Italiano](README.it.md)
+
 **View and explore your JSON as an interactive diagram.**
 
 JSON Explorer turns objects, arrays, and values into connected cards. Expand
