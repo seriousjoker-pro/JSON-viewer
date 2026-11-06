@@ -6,8 +6,9 @@
     <meta
       name="description"
       content="Esplora e visualizza i tuoi dati JSON come un diagramma interattivo, direttamente nel browser."
+      data-i18n-content="metaDescription"
     />
-    <title>JSON Explorer — visualizzatore interattivo</title>
+    <title data-i18n="documentTitle">JSON Explorer — visualizzatore interattivo</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
   </head>
@@ -17,18 +18,25 @@
         <span class="brand-mark" aria-hidden="true">{ }</span>
         <span>json<span class="brand-accent">explorer</span></span>
       </a>
-      <div class="topbar-note">
-        <span class="status-dot" aria-hidden="true"></span>
-        I tuoi dati restano sul dispositivo
+      <div class="topbar-tools">
+        <label class="sr-only" for="language-select" data-i18n="languageLabel">Lingua dell'interfaccia</label>
+        <select id="language-select" aria-label="Lingua dell'interfaccia" data-i18n-aria-label="languageLabel">
+          <option value="it">Italiano</option>
+          <option value="en">English</option>
+        </select>
+        <div class="topbar-note">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span data-i18n="privacyTopNote">I tuoi dati restano sul dispositivo</span>
+        </div>
       </div>
     </header>
 
     <main class="page">
       <section class="intro">
         <div>
-          <p class="eyebrow">JSON, finalmente leggibile</p>
-          <h1>Esplora i dati, <span>un nodo alla volta.</span></h1>
-          <p class="intro-copy">
+          <p class="eyebrow" data-i18n="eyebrow">JSON, finalmente leggibile</p>
+          <h1><span data-i18n="headline">Esplora i dati,</span> <span id="headline-highlight">un nodo alla volta.</span></h1>
+          <p class="intro-copy" data-i18n="introCopy">
             Incolla o carica un JSON e trasformalo in una struttura interattiva.
             Espandi gli oggetti, cerca una proprietà e segui ogni percorso.
           </p>
@@ -40,23 +48,23 @@
         </div>
       </section>
 
-      <section class="workspace" aria-label="Editor e visualizzatore JSON">
+      <section class="workspace" aria-label="Editor e visualizzatore JSON" data-i18n-aria-label="workspaceLabel">
         <section class="panel editor-panel" aria-labelledby="editor-title">
           <div class="panel-heading">
             <div>
-              <p class="panel-kicker">01 / SORGENTE</p>
-              <h2 id="editor-title">Il tuo JSON</h2>
+              <p class="panel-kicker" data-i18n="sourceKicker">01 / SORGENTE</p>
+              <h2 id="editor-title" data-i18n="yourJson">Il tuo JSON</h2>
             </div>
-            <label class="icon-button upload-button" for="file-input" title="Apri un file JSON">
+            <label class="icon-button upload-button" for="file-input" title="Apri un file JSON" data-i18n-title="openFile">
               <svg viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M10 13V3m0 0L6.5 6.5M10 3l3.5 3.5M4 12v4h12v-4" />
               </svg>
-              <span>Apri file</span>
+              <span data-i18n="openFile">Apri file</span>
             </label>
             <input id="file-input" type="file" accept=".json,application/json" hidden />
           </div>
 
-          <label class="sr-only" for="json-input">Inserisci o modifica il JSON</label>
+          <label class="sr-only" for="json-input" data-i18n="editorLabel">Inserisci o modifica il JSON</label>
           <textarea
             id="json-input"
             wrap="off"
@@ -66,14 +74,14 @@
             aria-describedby="editor-hint"
           ></textarea>
           <div class="editor-footer">
-            <span id="editor-hint">JSON standard · modifica qui i tuoi dati</span>
+            <span id="editor-hint" data-i18n="editorHint">JSON standard · modifica qui i tuoi dati</span>
             <span id="source-size">0 caratteri</span>
           </div>
           <button class="primary-button" id="render-button" type="button">
             <svg viewBox="0 0 20 20" aria-hidden="true">
               <path d="m7 4 9 6-9 6V4Z" />
             </svg>
-            Visualizza struttura
+            <span data-i18n="renderStructure">Visualizza struttura</span>
           </button>
           <p class="message" id="parse-message" role="status" aria-live="polite"></p>
         </section>
@@ -82,13 +90,13 @@
           <div class="visual-heading">
             <div class="panel-heading visual-title-row">
               <div>
-                <p class="panel-kicker">02 / VISUALIZZAZIONE</p>
-                <h2 id="visual-title">Struttura dati</h2>
+                <p class="panel-kicker" data-i18n="visualizationKicker">02 / VISUALIZZAZIONE</p>
+                <h2 id="visual-title" data-i18n="dataStructure">Struttura dati</h2>
               </div>
               <div class="tree-actions">
-                <button class="text-button" id="collapse-button" type="button">Chiudi tutto</button>
+                <button class="text-button" id="collapse-button" type="button" data-i18n="collapseAll">Chiudi tutto</button>
                 <span class="action-divider" aria-hidden="true"></span>
-                <button class="text-button" id="expand-button" type="button">Espandi tutto</button>
+                <button class="text-button" id="expand-button" type="button" data-i18n="expandAll">Espandi tutto</button>
               </div>
             </div>
             <div class="tree-toolbar">
@@ -97,59 +105,59 @@
                   <circle cx="8.7" cy="8.7" r="5.7" />
                   <path d="m13 13 4 4" />
                 </svg>
-                <span class="sr-only">Cerca in struttura</span>
-                <input id="search-input" type="search" placeholder="Cerca chiave o valore…" />
+                <span class="sr-only" data-i18n="searchLabel">Cerca in struttura</span>
+                <input id="search-input" type="search" placeholder="Cerca chiave o valore…" data-i18n-placeholder="searchPlaceholder" />
                 <kbd>Ctrl K</kbd>
               </label>
-              <button class="icon-button copy-button" id="copy-button" type="button" title="Copia JSON formattato">
+              <button class="icon-button copy-button" id="copy-button" type="button" title="Copia JSON formattato" data-i18n-title="copyJson">
                 <svg viewBox="0 0 20 20" aria-hidden="true">
                   <rect x="7" y="6" width="10" height="12" rx="2" />
                   <path d="M13 6V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2" />
                 </svg>
-                <span>Copia</span>
+                <span data-i18n="copy">Copia</span>
               </button>
-              <button class="icon-button" id="fullscreen-button" type="button" aria-pressed="false" title="Visualizzazione a schermo intero">
+              <button class="icon-button" id="fullscreen-button" type="button" aria-pressed="false" title="Visualizzazione a schermo intero" data-i18n-title="fullscreen">
                 <svg viewBox="0 0 20 20" aria-hidden="true">
                   <path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4" />
                 </svg>
-                <span id="fullscreen-label">Schermo intero</span>
+                <span id="fullscreen-label" data-i18n="fullscreen">Schermo intero</span>
               </button>
             </div>
             <p id="fullscreen-message" class="message error" role="status" hidden></p>
           </div>
           <div class="tree-meta">
-            <span id="tree-summary">Pronto per esplorare</span>
+            <span id="tree-summary" data-i18n="ready">Pronto per esplorare</span>
             <span id="result-count" aria-live="polite"></span>
           </div>
           <div class="graph-canvas" id="graph-canvas">
-            <svg id="graph" class="graph" role="group" aria-label="Diagramma interattivo della struttura JSON"></svg>
+            <svg id="graph" class="graph" role="group" aria-label="Diagramma interattivo della struttura JSON" data-i18n-aria-label="graphLabel"></svg>
             <div id="empty-state" class="empty-state" hidden>
               <span class="empty-icon" aria-hidden="true">⌕</span>
-              <p>Nessun risultato trovato</p>
-              <span>Prova un'altra chiave o un altro valore.</span>
+              <p data-i18n="noResults">Nessun risultato trovato</p>
+              <span data-i18n="tryAnotherSearch">Prova un'altra chiave o un altro valore.</span>
             </div>
-            <div class="canvas-controls" aria-label="Controlli del diagramma">
-              <button id="zoom-out" type="button" aria-label="Riduci zoom">−</button>
-              <button id="fit-graph" type="button" aria-label="Centra e adatta diagramma">Adatta</button>
-              <button id="zoom-in" type="button" aria-label="Aumenta zoom">+</button>
+            <div class="canvas-controls" aria-label="Controlli del diagramma" data-i18n-aria-label="canvasControls">
+              <button id="zoom-out" type="button" aria-label="Riduci zoom" data-i18n-aria-label="zoomOut">−</button>
+              <button id="fit-graph" type="button" aria-label="Centra e adatta diagramma" data-i18n="fitGraph" data-i18n-aria-label="fitGraphLabel">Adatta</button>
+              <button id="zoom-in" type="button" aria-label="Aumenta zoom" data-i18n-aria-label="zoomIn">+</button>
             </div>
-            <span class="canvas-hint">Trascina per spostarti · rotella per zoom</span>
+            <span class="canvas-hint" data-i18n="canvasHint">Trascina per spostarti · rotella per zoom</span>
           </div>
           <div class="visual-footer">
-            <span><i class="legend-dot object-dot"></i> Oggetto</span>
+            <span><i class="legend-dot object-dot"></i> <span data-i18n="object">Oggetto</span></span>
             <span><i class="legend-dot array-dot"></i> Array</span>
-            <span><i class="legend-dot value-dot"></i> Valore</span>
+            <span><i class="legend-dot value-dot"></i> <span data-i18n="value">Valore</span></span>
             <span class="privacy-note">
               <svg viewBox="0 0 16 16" aria-hidden="true">
                 <rect x="3" y="7" width="10" height="7" rx="1.5" />
                 <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" />
               </svg>
-              Locale e privato
+              <span data-i18n="localPrivate">Locale e privato</span>
             </span>
           </div>
         </section>
       </section>
-      <footer class="page-footer">Un modo più chiaro di leggere i tuoi JSON.</footer>
+      <footer class="page-footer" data-i18n="pageFooter">Un modo più chiaro di leggere i tuoi JSON.</footer>
     </main>
   </body>
 </html>

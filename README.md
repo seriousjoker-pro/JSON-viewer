@@ -1,240 +1,240 @@
 # JSON Explorer
 
-**Visualizza ed esplora i tuoi JSON come un diagramma interattivo.**
+**View and explore your JSON as an interactive diagram.**
 
-JSON Explorer trasforma oggetti, array e valori in schede collegate: puoi aprire
-i singoli rami, seguire le relazioni e cercare nei dati senza perderti tra le
-parentesi. Disponibile come applicazione **desktop Windows** e come **web app**.
+JSON Explorer turns objects, arrays, and values into connected cards. Expand
+branches, follow relationships, and search your data without getting lost in
+brackets. Available as a **Windows desktop app** and a **web app**.
 
-[Download e versioni di prova](https://github.com/seriousjoker-pro/JSON-viewer/releases)
-| [Guida ai controlli](#esplorare-un-json)
-| [Licenza MIT](LICENSE)
+[Download and try releases](https://github.com/seriousjoker-pro/JSON-viewer/releases)
+| [Controls guide](#exploring-json)
+| [MIT License](LICENSE)
 
-## Novita' della versione 1.1.0
+## What's new in version 1.1.0
 
-**Migliorie**
+**Improvements**
 
-- Pannello di visualizzazione a schermo intero, con ricerca e controlli ancora
-  disponibili; uscita tramite pulsante o Esc.
-- Collegamento fra diagramma ed editor: un clic su una scheda seleziona il valore
-  esatto e porta la relativa riga in vista, anche con valori ripetuti o chiavi
-  contenenti caratteri speciali.
-- Selezione del codice anche a schermo intero: all'uscita viene mostrata
-  nell'editor l'ultima riga scelta.
-- Apertura e chiusura dei rami con centratura sulla scheda selezionata,
-  mantenendo lo zoom corrente.
+- Full-screen visualization panel with search and controls still available; exit
+  using the button or Esc.
+- Diagram-to-editor navigation: clicking a card selects the exact value and
+  scrolls its line into view, including when values repeat or keys contain
+  special characters.
+- Code selection is available in full screen too: when you exit, the last
+  selected line is shown in the editor.
+- Expanding and collapsing branches centers the selected card while preserving
+  the current zoom.
 
-**Correzioni**
+**Fixes**
 
-- Il cambio di stato di un ramo non reimposta piu' lo zoom sull'intero grafo.
-- Il trascinamento del canvas non seleziona piu' il testo delle schede;
-  editor e campo di ricerca conservano la selezione del testo.
-- Se il JSON e' stato modificato dopo la generazione del diagramma, viene
-  richiesto di aggiornarlo anziche' selezionare una posizione non piu' valida.
-- Il diagramma si ridimensiona quando cambia lo spazio disponibile nel pannello.
+- Expanding or collapsing a branch no longer resets the zoom to the entire graph.
+- Dragging the canvas no longer selects card text; text selection remains
+  available in the editor and search field.
+- If the JSON has changed since the diagram was generated, you are asked to
+  update it instead of selecting a line that may no longer be valid.
+- The diagram resizes when the space available in the panel changes.
 
-## Anteprima
+## Preview
 
-![Editor JSON e diagramma interattivo con nodi collegati](docs/images/json-explorer-overview.png)
+![JSON editor and diagram with connected nodes](docs/images/json-explorer-overview.png)
 
-L'editor a sinistra contiene il documento; il canvas a destra ne mostra la
-struttura. Oggetti, array e valori hanno colori distinti, con tipo e anteprima
-del contenuto su ogni scheda.
+The editor on the left contains the document; the canvas on the right shows its
+structure. Objects, arrays, and values have distinct colors, and each card
+shows the type and a preview of its contents.
 
-## Desktop Windows: download e installazione
+## Windows desktop: download and installation
 
-**Versione di prova:** la build dell'installer e' stata verificata, ma
-l'installazione completa e l'associazione dei file su Windows richiedono ancora
-una prova manuale.
+**Preview release:** the installer build has been verified, but a full
+installation and file association on Windows still require manual testing.
 
-Non serve installare Node.js per utilizzare la versione desktop distribuita.
+You do not need to install Node.js to use the distributed desktop version.
 
-1. Apri la pagina [Release](https://github.com/seriousjoker-pro/JSON-viewer/releases).
-2. Nella sezione **Assets**, scarica l'installer **1.1.0** (`JSON Explorer Setup 1.1.0.exe`;
-   GitHub puo' visualizzarne il nome con punti al posto degli spazi).
-3. Esegui l'installer e scegli la cartella di installazione.
-4. Avvia **JSON Explorer** e usa **Apri file** per caricare un documento `.json`.
+1. Open the [Releases](https://github.com/seriousjoker-pro/JSON-viewer/releases) page.
+2. Under **Assets**, download the **1.1.0** installer (`JSON Explorer Setup 1.1.0.exe`;
+   GitHub may display its name with periods instead of spaces).
+3. Run the installer and choose an installation folder.
+4. Launch **JSON Explorer** and use **Open file** to load a `.json` document.
 
-L'installer attuale e' per Windows x64. Non dispone di un certificato di firma
-digitale dell'autore: Windows potrebbe mostrare un avviso relativo a un autore
-sconosciuto.
+The current installer is for Windows x64. It is not signed with a code-signing
+certificate, so Windows may display an unknown publisher warning.
 
-### Aggiornare una versione gia' installata
+### Updating an existing installation
 
-1. Prima di chiudere l'app, recupera con **Copia** eventuali modifiche al JSON:
-   non vengono salvate automaticamente.
-2. Chiudi JSON Explorer.
-3. Scarica il nuovo installer dalla pagina
-   [Release](https://github.com/seriousjoker-pro/JSON-viewer/releases).
-4. Eseguilo con lo stesso account Windows e mantieni la stessa cartella
-   d'installazione usata in precedenza. Non serve disinstallare prima.
-5. Riapri l'app e verifica la presenza del pulsante **Schermo intero**.
+1. Before closing the app, use **Copy** to retrieve any JSON edits; they are not
+   saved automatically.
+2. Close JSON Explorer.
+3. Download the new installer from the
+   [Releases](https://github.com/seriousjoker-pro/JSON-viewer/releases) page.
+4. Run it using the same Windows account and keep the same installation folder.
+   You do not need to uninstall the previous version first.
+5. Reopen the app and check that the **Full screen** button is available.
 
-Non e' presente un aggiornamento automatico: ogni nuova versione va installata
-manualmente. I documenti `.json` originali non vengono modificati. Se Windows
-non mantiene l'app predefinita, selezionala nuovamente nelle impostazioni.
-L'aggiornamento sopra la versione precedente richiede ancora una verifica
-manuale sul PC dell'utente.
+There is no automatic updater, so each new version must be installed manually.
+Original `.json` documents are not modified. If Windows does not retain the app
+as the default, select it again in Settings. Updating over a previous version
+still requires manual testing on a user's PC.
 
-### Usare "Apri con" e impostare l'app predefinita
+### Using "Open with" and setting the default app
 
-L'installazione registra il supporto per l'estensione `.json`.
-Da Esplora file, fai clic destro su un documento e scegli **Apri con**,
-quindi seleziona **JSON Explorer**. Se non compare, usa **Scegli un'altra app**
-e individua `JSON Explorer.exe` nella cartella di installazione.
+The installation registers support for the `.json` extension. In File Explorer,
+right-click a document and choose **Open with**, then select **JSON Explorer**.
+If it is not listed, choose **Choose another app** and locate `JSON Explorer.exe`
+in the installation folder.
 
-Per aprire sempre i JSON con l'app, scegli JSON Explorer per l'estensione `.json`
-in **Impostazioni > App > App predefinite**. La modifica va confermata da te:
-l'installer non forza l'associazione predefinita.
+To always open JSON files with the app, select JSON Explorer for the `.json`
+extension under **Settings > Apps > Default apps**. You must confirm this change;
+the installer does not force the default association.
 
-Se l'app e' gia' aperta, il file viene caricato nella stessa finestra, sostituendo
-il documento visualizzato. L'app permette di leggere e modificare il testo
-nell'editor, ma **non salva le modifiche sul file originale**: usa **Copia**
-per recuperare il JSON formattato.
+If the app is already open, the file is loaded in the same window, replacing the
+currently displayed document. You can read and edit the text in the editor, but
+**changes are not saved to the original file**. Use **Copy** to retrieve the
+formatted JSON.
 
-## Esplorare un JSON
+## Exploring JSON
 
-1. Incolla il documento nell'editor oppure usa **Apri file**.
-2. Premi **Visualizza struttura** dopo ogni modifica manuale; un file caricato
-   viene visualizzato automaticamente.
-3. Fai clic su una scheda oggetto o array per aprire o chiudere quel ramo.
-4. Cerca una chiave, un valore o un percorso: i risultati vengono evidenziati
-   e i rami necessari vengono aperti.
+1. Paste the document into the editor or use **Open file**.
+2. Click **View structure** after each manual edit; loaded files are displayed
+   automatically.
+3. Click an object or array card to expand or collapse that branch.
+4. Search for a key, value, or path; matching results are highlighted and the
+   necessary branches are opened.
 
-![Ricerca del valore giulia con evidenziazione dei nodi e dei relativi percorsi](docs/images/json-explorer-search.png)
+![Search for the value giulia with matching nodes and paths highlighted](docs/images/json-explorer-search.png)
 
-| Controllo | Funzione |
+| Control | Function |
 | --- | --- |
-| Clic su un oggetto o array non vuoto | Espande o riduce il singolo ramo |
-| Clic su una scheda | Seleziona il valore nel JSON a sinistra e porta la riga in vista, anche all'uscita dallo schermo intero; se il testo e' stato modificato, occorre prima aggiornare la struttura |
-| Invio o Spazio su una scheda selezionata con Tab | Espande o riduce il ramo da tastiera |
-| Trascinamento dello sfondo | Sposta il diagramma |
-| Rotella del mouse oppure `+` e `-` | Aumenta o riduce lo zoom |
-| **Adatta** | Ricentra il diagramma e adatta la larghezza al canvas |
-| **Schermo intero** | Mostra solo il pannello di visualizzazione, con ricerca e controlli; premi Esc o **Esci da schermo intero** per tornare alla vista normale |
-| **Espandi tutto** / **Chiudi tutto** | Apre o chiude tutti i rami |
-| **Ctrl+K** oppure **Cmd+K** | Porta il cursore nella ricerca |
-| **Copia** | Copia il contenuto dell'editor come JSON formattato |
+| Click a non-empty object or array | Expand or collapse that branch |
+| Click a card | Selects the value in the JSON on the left and scrolls its line into view, including when exiting full screen; if the text has changed, update the structure first |
+| Enter or Space on a card focused with Tab | Expand or collapse the branch using the keyboard |
+| Drag the background | Pan the diagram |
+| Mouse wheel or `+` and `-` | Zoom in or out |
+| **Fit** | Recenter the diagram and fit its width to the canvas |
+| **Full screen** | Show only the visualization panel, with search and controls; press Esc or **Exit full screen** to return to the normal view |
+| **Expand all** / **Collapse all** | Expand or collapse every branch |
+| **Ctrl+K** or **Cmd+K** | Focus the search field |
+| **Copy** | Copy the editor contents as formatted JSON |
 
-Aprire o chiudere un ramo centra la scheda selezionata nel pannello, mantenendo
-lo zoom corrente. I comandi **Espandi tutto** e **Chiudi tutto** mantengono
-come riferimento la radice. Usa **Adatta** per ricentrare esplicitamente la vista.
-Il trascinamento sul canvas non seleziona il testo delle schede; la selezione
-nei campi di ricerca e nell'editor rimane disponibile.
+Expanding or collapsing a branch centers the selected card in the panel while
+preserving the current zoom. **Expand all** and **Collapse all** keep the root as
+the reference point. Use **Fit** to explicitly recenter the view. Dragging the
+canvas does not select card text; text selection remains available in the
+search field and editor.
 
-Sono supportati anche documenti con una radice array o un valore singolo,
-oggetti e array vuoti, booleani e `null`. Un JSON non valido produce un messaggio
-d'errore; riga e colonna vengono mostrate quando disponibili dal parser.
+Documents with a root array or a single root value are also supported, as are
+empty objects and arrays, booleans, and `null`. Invalid JSON produces an error
+message; line and column are shown when available from the parser.
 
-## Versione browser
+## Browser version
 
-Apri `index.html` in un browser moderno: non sono richieste compilazione o
-dipendenze per usare il visualizzatore.
+Open `index.html` in a modern browser. No build step or dependencies are
+required to use the viewer.
 
-Il pulsante **Apri file** consente di selezionare un documento locale. La versione
-browser non registra associazioni Windows: per usare **Apri con** installa la
-versione desktop.
+Use the selector at the top to switch the interface between Italian and English;
+your choice is remembered in the browser.
 
-Il pulsante **Schermo intero** usa la modalita' nativa quando disponibile;
-nei contesti che non la supportano, il pannello occupa l'intera area della pagina.
+The **Open file** button lets you select a local document. The browser version
+does not register Windows file associations; install the desktop version to use
+**Open with**.
 
-La copia negli appunti dipende dai permessi e dal contesto di sicurezza del
-browser. Se non funziona aprendo direttamente `index.html`, puoi servire la
-cartella su localhost, ad esempio con Python:
+The **Full screen** button uses native full-screen mode when available. In
+contexts that do not support it, the panel fills the page instead.
+
+Clipboard access depends on browser permissions and security context. If it does
+not work when opening `index.html` directly, you can serve the folder on
+localhost, for example with Python:
 
 ```powershell
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Poi apri <http://127.0.0.1:8765>.
+Then open <http://127.0.0.1:8765>.
 
-## Sviluppo e creazione dell'installer
+## Development and building the installer
 
-Per avviare la versione desktop dal codice sorgente servono Node.js e npm.
-Esegui questi comandi dalla cartella del progetto:
+To run the desktop version from source, you need Node.js and npm. Run these
+commands from the project folder:
 
 ```powershell
 npm ci
 npm start
 ```
 
-Per controllare la sintassi JavaScript:
+To check JavaScript syntax:
 
 ```powershell
 npm run check
 ```
 
-Per generare l'installer su Windows:
+To build the installer on Windows:
 
 ```powershell
 npm run dist:win
 ```
 
-I risultati vengono scritti in `dist`:
+Build outputs are written to `dist`:
 
-| Percorso | Contenuto |
+| Path | Contents |
 | --- | --- |
-| `dist\JSON Explorer Setup 1.1.0.exe` | Installer Windows |
-| `dist\win-unpacked\JSON Explorer.exe` | Applicazione desktop eseguibile senza installazione, da mantenere con tutti i file della stessa cartella |
+| `dist\JSON Explorer Setup 1.1.0.exe` | Windows installer |
+| `dist\win-unpacked\JSON Explorer.exe` | Desktop app executable that can run without installation; keep all files in the same folder |
 
-`dist` e `node_modules` sono esclusi da Git. Il sorgente desktop e' incluso
-nel repository. Una copia dell'installer e lo ZIP dei sorgenti sono inclusi in
-[`installers`](installers) tramite **Git LFS**, perche' l'eseguibile supera il
-limite dei normali file Git. Per scaricarli senza Git LFS puoi usare gli allegati
-delle [Release GitHub](https://github.com/seriousjoker-pro/JSON-viewer/releases).
+`dist` and `node_modules` are excluded from Git. The desktop source is included
+in the repository. A copy of the installer and a source ZIP are included in
+[`installers`](installers) through **Git LFS**, because the executable exceeds
+the normal Git file-size limit. You can download them without Git LFS from the
+[GitHub Releases](https://github.com/seriousjoker-pro/JSON-viewer/releases)
+assets.
 
-Se cloni il repository, installa [Git LFS](https://git-lfs.com/) e scarica i
-file binari:
+If you clone the repository, install [Git LFS](https://git-lfs.com/) and
+download the binary files:
 
 ```powershell
 git lfs install
 git lfs pull
 ```
 
-Lo ZIP dei sorgenti non contiene `node_modules`: dopo averlo estratto, usa
-`npm ci` e `npm start`, oppure `npm run dist:win` per ricreare l'installer.
-L'installer `.exe`, invece, contiene il necessario per eseguire l'app e non
-richiede Node.js.
+The source ZIP does not include `node_modules`: after extracting it, run
+`npm ci` and `npm start`, or `npm run dist:win` to rebuild the installer. The
+`.exe` installer already includes everything needed to run the app and does not
+require Node.js.
 
-### Struttura del codice
+### Code structure
 
-| File o cartella | Responsabilita' |
+| File or folder | Responsibility |
 | --- | --- |
-| `index.html` | Interfaccia condivisa da browser e desktop |
-| `styles.css` | Tema, layout e stile del diagramma |
-| `app.js` | Parsing, nodi SVG, ricerca, zoom e interazioni |
-| `desktop/main.cjs` | Finestra Electron e apertura dei file passati dal sistema |
-| `desktop/preload.cjs` | Comunicazione isolata fra Electron e interfaccia |
-| `package.json` | Comandi npm, dipendenze e configurazione installer/associazione `.json` |
-| `docs/images` | Schermate dell'app utilizzate in questa guida |
-| `installers` | Installer Windows e archivio dei sorgenti tracciati con Git LFS |
+| `index.html` | Interface shared by the browser and desktop versions |
+| `styles.css` | Theme, layout, and diagram styling |
+| `app.js` | Parsing, SVG nodes, search, zoom, and interactions |
+| `desktop/main.cjs` | Electron window and opening files passed by the system |
+| `desktop/preload.cjs` | Isolated communication between Electron and the interface |
+| `package.json` | npm scripts, dependencies, and installer / `.json` association configuration |
+| `docs/images` | App screenshots used in this guide |
+| `installers` | Windows installer and source archive tracked with Git LFS |
 
-## Verifica manuale della versione desktop
+## Manual testing of the desktop version
 
-Prima di utilizzare l'app come visualizzatore predefinito, verifica questi
-passaggi sulla tua macchina:
+Before using the app as your default viewer, verify these steps on your machine:
 
-- Installa l'app, avviala e apri un JSON con **Apri file**.
-- Apri un `.json` da **Apri con** a programma chiuso e poi gia' aperto.
-- Espandi e richiudi i singoli rami; prova ricerca, zoom e trascinamento.
-- Carica un JSON non valido e verifica che venga segnalato l'errore.
-- Prova la disinstallazione e controlla che i tuoi documenti siano rimasti intatti.
+- Install and launch the app, then open a JSON file with **Open file**.
+- Open a `.json` file using **Open with** while the app is closed, then while it
+  is already open.
+- Expand and collapse individual branches; try search, zoom, and panning.
+- Load invalid JSON and check that the error is reported.
+- Try uninstalling and check that your documents remain intact.
 
-## Privacy e limiti attuali
+## Privacy and current limitations
 
-Il contenuto dei JSON viene letto e analizzato localmente sul dispositivo:
-non viene caricato su un server. Il foglio di stile richiede i font a Google
-Fonts; senza connessione vengono usati i font di sistema.
+JSON contents are read and parsed locally on your device; they are not uploaded
+to a server. The stylesheet fetches fonts from Google Fonts; system fonts are
+used when offline.
 
-Il diagramma non usa ancora la virtualizzazione: documenti molto grandi o
-profondamente annidati possono rallentare il rendering. Non sono previsti
-salvataggio su file, sincronizzazione o ripristino automatico delle modifiche
-alla chiusura dell'app.
+The diagram does not yet use virtualization, so very large or deeply nested
+documents may slow down rendering. Saving to files, synchronization, and
+automatic recovery of edits when closing the app are not supported.
 
-## Licenza
+## License
 
 Copyright (c) 2026 Marco Paleari.
 
-Distribuito con [licenza MIT](LICENSE): sono consentiti uso, modifica e
-ridistribuzione, anche commerciale, mantenendo l'avviso di copyright e la
-licenza. Il software viene fornito senza garanzie.
+Distributed under the [MIT License](LICENSE): use, modification, and
+redistribution, including commercial use, are permitted provided the copyright
+notice and license are retained. The software is provided without warranties.
